@@ -1,0 +1,16 @@
+Metier:
+    - class Poste
+        - id (entier)
+        - nom_poste (String)
+    
+    - class Niveau:
+        - id (entier)
+        - niveau (string)
+    
+    - class Employee
+        - id entier (entier)
+        - nom (string)
+        - prenom (string)
+        - date_naissance (java.util.date)
+        - pste (Poste)
+        - niveau (Niveau)
