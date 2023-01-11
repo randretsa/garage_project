@@ -1,4 +1,4 @@
-package PackageExemple;
+package Magasin;
 
 import java.sql.Date;
 import java.util.ArrayList;

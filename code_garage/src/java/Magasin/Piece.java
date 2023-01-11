@@ -1,4 +1,4 @@
-package PackageExemple;
+package Magasin;
 
 public class Piece {
     int Id;
