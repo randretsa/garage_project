@@ -1,0 +1,18 @@
+Class Client:
+    - id (int)
+    - nom (String)
+    - prenom (String)
+    - pwd (String)
+
+Class Piece:
+    - id
+    - ZonePiece
+    - nomPiece
+    - quantite
+    - prixUnitaire
+
+class Facture:
+    - date (date)
+    - ref (String)
+    - Client (client)
+    - ListPiece (ArrayList)
