@@ -1,12 +1,24 @@
 Metier:
+    - class connexion
+    
     - class Poste
         - id (entier)
         - nom_poste (String)
+        
+        public ArrayList findAllPoste(){
+            list_poste: select*from employe
+            return list_poste;
+        } 
     
+
     - class Niveau:
         - id (entier)
         - niveau (string)
     
+        public ArrayList findAllNiveau(){
+            return list_niveau;
+        }
+
     - class Employee
         - id entier (entier)
         - nom (string)
@@ -14,3 +26,7 @@ Metier:
         - date_naissance (java.util.date)
         - pste (Poste)
         - niveau (Niveau)
+
+        public void saveEmploye(Nom,prenom,date_naissance,poste,niveau){
+
+        }
