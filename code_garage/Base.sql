@@ -20,3 +20,14 @@ create table niveau_etude (
     idniveau serial primary key,
     niveau varchar(100)
 );
+
+insert into poste values (default,'Controleur de Vehicule');
+insert into poste values (default,'Peintre en carrosserie'); 
+insert into poste values (default,'Reparateur en carosserie'); 
+insert into poste values (default,'Mecanicien Dieseliste');
+
+insert into niveau_etude values (default,'CAP');
+insert into niveau_etude values (default,'BACC+2');
+insert into niveau_etude values (default,'Ingeniurie');
+insert into niveau_etude values (default,'BACC+5');
+
