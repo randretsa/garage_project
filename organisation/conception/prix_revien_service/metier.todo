@@ -1,0 +1,25 @@
+class SalairePoste extends poste:
+        - montant
+    
+class ServicePoste:
+        - Poste (SalairePoste)
+        - dure (double)
+
+class Service:
+        - idservice (entier)
+        - nom-service (String)
+        - listposte (ServicePoste)
+    
+        fonction getDetailService:
+            public list<ServicePoste> getDetailService(idservice){
+                "select from service_poste join salaire_poste join poste join service where idservice = idservice"
+
+                return list;
+            }
+        
+        fonction getMontantService:
+
+            public double getMontantService(){
+                return somme (montant*dure) de la listposte
+            }
+        
