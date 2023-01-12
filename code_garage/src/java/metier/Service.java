@@ -24,9 +24,9 @@ public class Service {
     }
 
     
-    public double getMontantService(){
-        return somme (montant*dure);
-    }
+    // public double getMontantService(){
+    //     return somme (montant*dure);
+    // }
 
     // public List<ServicePoste> getDetailService(Connection connection,int idservice)throws Exception {
     //     List<ServicePoste> detailservice = new List<ServicePoste>();

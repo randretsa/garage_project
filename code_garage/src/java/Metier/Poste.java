@@ -4,11 +4,6 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-<<<<<<< Updated upstream
-=======
-import java.lang.Exception;
-
->>>>>>> Stashed changes
 
 import connexion.Connexion;
 
