@@ -4,9 +4,11 @@
  */
 package servlet;
 
+import connexion.Connexion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,6 +16,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import metier.Employee;
+import metier.Niveau;
+import metier.Poste;
 
 /**
  *
@@ -66,15 +71,20 @@ public class InsertEmployeServlet extends HttpServlet {
         
                         try{
 
-
-                         //request.setAttribute("list_serie", list_serie);
+                            Niveau niveau = new Niveau();
+                            Poste poste = new Poste();
+                            ArrayList<Niveau> list_niveau = niveau.liste_niveau(null);
+                            ArrayList<Poste> list_poste = poste.liste_poste(null);
+                            
+                         request.setAttribute("list_niveau", list_niveau);
+                         request.setAttribute("list_poste", list_poste);
                          
                         }catch(Exception e){
                              out.print(e.getStackTrace());
                         }
 
                          
-                         RequestDispatcher dispat = request.getRequestDispatcher("/index.html");
+                         RequestDispatcher dispat = request.getRequestDispatcher("/insertion_employe.jsp");
                          dispat.forward(request,response);           
 
                 
@@ -91,21 +101,32 @@ public class InsertEmployeServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
                 
                 PrintWriter out = response.getWriter();
             
           //      Object o = request.getSession().getAttribute("id_candidat");
+                String nom= request.getParameter("nom");
+                String prenom = request.getParameter("prenom");
+                String date = request.getParameter("date_naissance");
+                String idniveau = request.getParameter("niveau");
+                String idposte = request.getParameter("poste");
+                Employee employee = null;
+                Connexion connexion = null;
                 try{
                     
-                   // date = Date.valueOf(request.getParameter("date"));
+                   connexion = new Connexion();
+                    employee = new Employee();
+                    java.util.Date date_naissance = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+                    //out.print(nom + prenom + date_naissance + idniveau + idposte);
                     
+                    employee.saveEmploye(connexion.Connex("postgres"), nom, prenom, date_naissance,Integer.parseInt(idposte),Integer.parseInt(idniveau));
                    
                 }catch(Exception e){
 
-                    out.print(e.getMessage());
+                    out.print(e);
                    
                 }
+                
   
         
         //response.sendRedirect("/gestion_institut/noteservlet");

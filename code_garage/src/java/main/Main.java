@@ -1,18 +1,25 @@
 package main;
 
-import java.util.ArrayList;
-
 import connexion.Connexion;
-import metier.Poste;
+import java.util.ArrayList;
+import java.util.Date;
+import metier.Employee;
+import metier.Niveau;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // Connexion connexion = new Connexion();
+         Connexion connexion = new Connexion();
         // System.out.println(connexion);
-        Poste poste = new Poste();
-        ArrayList<Poste> list= poste.liste_poste(null);
+        Niveau poste = new Niveau();
+        ArrayList<Niveau> list= poste.liste_niveau(null);
         for (int index = 0; index < list.size(); index++) {
-            System.out.println(list.get(index).getNom_poste());
+            System.out.println(list.get(index).getNiveau());
         }
+        
+        
+        
+        Employee emp = new Employee();
+            emp.saveEmploye(connexion.Connex("postgres"), "njaka", "andria", new Date(), 1, 1);
+    
     }
 }

@@ -1,11 +1,11 @@
 package metier;
 
+import java.lang.Exception;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.lang.Exception;
-import java.sql.SQLException;
 
 
 public class Employee {
@@ -31,7 +31,10 @@ public class Employee {
 
 
     public void saveEmploye(Connection connection, String nom,String prenom,Date date_naissance,int poste,int niveau)throws SQLException,Exception {
-        String insert = "INSERT INTO Employe VALUES (default,"+nom+","+prenom+","+date_naissance+","+poste+","+niveau+")";
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formatter.format(date_naissance);
+        
+        String insert = "INSERT INTO Employe VALUES (default,'"+nom+"','"+prenom+"','"+date_naissance+"',"+poste+","+niveau+")";
         Statement statement = connection.createStatement();
         int insertion = statement.executeUpdate(insert);
         

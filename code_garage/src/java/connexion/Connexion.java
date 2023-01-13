@@ -11,7 +11,7 @@ public class Connexion {
     {   
         Connection connection = null;
         Class.forName("org.postgresql.Driver");
-        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/garage_project", base, "Mahefa01");
+        connection = DriverManager.getConnection("jdbc:postgresql://localhost:5432/garage_project", base, "andrianjaka");
         return connection;
         
     }
