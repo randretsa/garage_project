@@ -1,6 +1,12 @@
-package Metier;
+package metier;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Date;
+import java.lang.Exception;
+import java.sql.SQLException;
+
 
 public class Employee {
     int Id;
@@ -12,6 +18,24 @@ public class Employee {
 
     public Employee() {
         
+    }
+
+    public Employee(int id,String nom,String prenom,Date date_naissance,Poste poste,Niveau niveau) {
+        this.setId(id);
+        this.setNom(nom);
+        this.setPrenom(prenom);
+        this.setDate_naissance(date_naissance);
+        this.setPoste(poste);
+        this.setNiveau(niveau);
+    }
+
+
+    public void saveEmploye(Connection connection, String nom,String prenom,Date date_naissance,int poste,int niveau)throws SQLException,Exception {
+        String insert = "INSERT INTO Employe VALUES (default,"+nom+","+prenom+","+date_naissance+","+poste+","+niveau+")";
+        Statement statement = connection.createStatement();
+        int insertion = statement.executeUpdate(insert);
+        
+        connection.close();
     }
 
     public int getId() {
