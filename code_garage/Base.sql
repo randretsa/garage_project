@@ -28,6 +28,18 @@ create table Employe (
     foreign key (idniveau) references niveau_etude(idniveau)
 );
 
+create table services (
+    idservice_garage serial primary key,
+    nom_service varchar(50)
+);
+
+create table service_poste (
+    idservice_poste serial primary key,
+    idservice int,
+    idposte int,
+    duree time,
+    foreign key (idposte) references poste(idposte)
+);
 
 
 insert into poste values (default,'Controleur de Vehicule');
@@ -44,4 +56,3 @@ insert into salaire_poste values (default,1,40000);
 insert into salaire_poste values (default,2,20000);
 insert into salaire_poste values (default,3,30000);
 insert into salaire_poste values (default,4,25000);
-
