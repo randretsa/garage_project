@@ -56,3 +56,10 @@ insert into salaire_poste values (default,1,40000);
 insert into salaire_poste values (default,2,20000);
 insert into salaire_poste values (default,3,30000);
 insert into salaire_poste values (default,4,25000);
+
+insert into services values (default,'vidange');
+insert into services values (default,'lavage');
+
+insert into service_poste values (default,1,3,'02:00:00');
+insert into service_poste values (default,1,4,'01:00:00');
+insert into service_poste values (default,2,1,'01:00:00');
