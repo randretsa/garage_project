@@ -29,6 +29,7 @@ public class Poste {
         }
 
         String requete = "select * from Poste";
+        System.out.println(requete);
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(requete);
     
