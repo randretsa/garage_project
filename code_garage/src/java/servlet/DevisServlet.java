@@ -92,7 +92,7 @@ public class DevisServlet extends HttpServlet {
                         }
 
                          
-                         RequestDispatcher dispat = request.getRequestDispatcher("/ListService.jsp");
+                         RequestDispatcher dispat = request.getRequestDispatcher("/services.jsp");
                          dispat.forward(request,response);           
 
                 

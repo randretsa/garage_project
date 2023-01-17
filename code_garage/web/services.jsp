@@ -5,7 +5,7 @@
 <%
 ArrayList<Niveau> niveaux = (ArrayList)request.getAttribute("list_niveau");
 ArrayList<Poste> postes = (ArrayList)request.getAttribute("list_poste");
-ArrayList<Service> service = (ArrayList)request.getAttribute("list_Services");
+ArrayList<Service> list_Services = (ArrayList)request.getAttribute("list_Services");
 %>
 
 <!DOCTYPE html>
@@ -28,16 +28,22 @@ ArrayList<Service> service = (ArrayList)request.getAttribute("list_Services");
                     <h1>Nos Services</h1>
        <table>
          <tr>
-           <th></th>
+          <th>Id</th>
            <th>Service</th>
+           <th>Revenus salarials</th>
+           <th>Revenus materiels</th>
+           <th>Marge Beneficiaire</th>
            <th>Montant</th>
          </tr>
          <% 
             for(Service service : list_Services) {  
          %>
          <tr>
-           <td>1</td>
+           <td><%out.println(service.getIdservice());%></td>
            <td><%out.println(service.getNom_service());%></td>
+           <td><%out.println(service.getMontantService());%></td>
+           <td><%out.println(service.getRevenuMateriel());%></td>
+           <td><%out.println(service.getMargeBeneficiaire());%></td>
            <td><%out.println(service.getValeurService());%></td>
          </tr>
          <% } %>
