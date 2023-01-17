@@ -2,13 +2,19 @@ package magasin;
 
 public class Piece {
     int Id;
-    String ZonePiece;
     String nomPiece;
     int Quantite;
-    int PrixUnitaire;
+    double PrixUnitaire;
 
     public Piece() {
         
+    }
+
+    public Piece(int id,String nom_piece,int quantite,double Prix) {
+        this.setId(id);
+        this.setNomPiece(nom_piece);
+        this.setQuantite(quantite);
+        this.setPrixUnitaire(Prix);
     }
 
     public int getId() {
@@ -16,12 +22,6 @@ public class Piece {
     }
     public void setId(int id) {
         Id = id;
-    }
-    public String getZonePiece() {
-        return ZonePiece;
-    }
-    public void setZonePiece(String zonePiece) {
-        ZonePiece = zonePiece;
     }
     public String getNomPiece() {
         return nomPiece;
@@ -35,10 +35,10 @@ public class Piece {
     public void setQuantite(int quantite) {
         Quantite = quantite;
     }
-    public int getPrixUnitaire() {
+    public double getPrixUnitaire() {
         return PrixUnitaire;
     }
-    public void setPrixUnitaire(int prixUnitaire) {
+    public void setPrixUnitaire(double prixUnitaire) {
         PrixUnitaire = prixUnitaire;
     }
 }

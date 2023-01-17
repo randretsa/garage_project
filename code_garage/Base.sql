@@ -41,6 +41,20 @@ create table service_poste (
     foreign key (idposte) references poste(idposte)
 );
 
+create table pieces (
+    idpiece serial primary key,
+    nom_piece varchar(50),
+    prix double precision
+);
+
+create table service_piece (
+    idservice int,
+    idpiece int,
+    quantite int,
+    foreign key (idservice) references services(idservice_garage),
+    foreign key (idpiece) references pieces(idpiece)
+);
+
 
 insert into poste values (default,'Controleur de Vehicule');
 insert into poste values (default,'Peintre en carrosserie'); 
@@ -63,3 +77,15 @@ insert into services values (default,'lavage');
 insert into service_poste values (default,1,3,'02:00:00');
 insert into service_poste values (default,1,4,'01:00:00');
 insert into service_poste values (default,2,1,'01:00:00');
+
+insert into pieces values (default,'huile',100000);
+insert into pieces values (default,'filtre_huile',20000);
+insert into pieces values (default,'entonnoir',10000);
+insert into pieces values (default,'savon',500);
+insert into pieces values (default,'eponge',500);
+
+insert into service_piece values (1,1,1);
+insert into service_piece values (1,2,1);
+insert into service_piece values (1,3,1);
+insert into service_piece values (2,4,2);
+insert into service_piece values (2,5,2);
