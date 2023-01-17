@@ -1,21 +1,22 @@
 package metier;
 
 public class SalairePoste extends Poste{
-    int Montant;
+    double Montant;
 
     public SalairePoste() {
 
     }
 
-    public SalairePoste(int montant) {
+    public SalairePoste(int id,String nom_poste,double montant) {
+        super(id,nom_poste);
         this.setMontant(montant);
     }
 
-    public int getMontant() {
+    public double getMontant() {
         return Montant;
     }
 
-    public void setMontant(int montant) {
+    public void setMontant(double montant) {
         Montant = montant;
     }
 

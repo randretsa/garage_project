@@ -9,7 +9,8 @@ public class ServicePoste {
     }
 
     public ServicePoste(SalairePoste poste,double dure) {
-
+        this.setPoste(poste);
+        this.setDure(dure);
     }
 
     public SalairePoste getPoste() {
