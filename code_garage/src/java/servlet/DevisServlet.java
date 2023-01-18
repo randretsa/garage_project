@@ -72,20 +72,11 @@ public class DevisServlet extends HttpServlet {
         
                         try{
 
-                            Niveau niveau = new Niveau();
-                            Poste poste = new Poste();
-
                             Service service = new Service();
 
-                            ArrayList<Niveau> list_niveau = niveau.liste_niveau(null);
-                            ArrayList<Poste> list_poste = poste.liste_poste(null);
-
                             ArrayList<Service> list_Services = service.getService(null);
-                            
-                         request.setAttribute("list_niveau", list_niveau);
-                         request.setAttribute("list_poste", list_poste);
 
-                         request.setAttribute("list_Services", list_Services);
+                            request.setAttribute("list_Services", list_Services);
                          
                         }catch(Exception e){
                              out.print(e.getStackTrace());
