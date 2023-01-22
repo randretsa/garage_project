@@ -12,6 +12,7 @@ import magasin.Piece;
 public class Service {
     int Idservice;
     String Nom_service;
+    double Marge_Beneficiaire;
     ArrayList<ServicePoste> listposte;
     ArrayList<Piece> listPieces;
 
@@ -19,9 +20,10 @@ public class Service {
 
     }
 
-    public Service(int idservice,String nom_service) {
+    public Service(int idservice,String nom_service,double marge_beneficiaire) {
         this.setIdservice(idservice);
         this.setNom_service(nom_service);
+        this.setMarge_Beneficiaire(marge_beneficiaire);
     }
 
     
@@ -76,7 +78,7 @@ public class Service {
         ResultSet resultSet = statement.executeQuery(requete);
 
         while (resultSet.next()) {
-            Service service = new Service(resultSet.getInt("idservice_garage"),resultSet.getString("nom_service"));
+            Service service = new Service(resultSet.getInt("idservice_garage"),resultSet.getString("nom_service"),resultSet.getDouble("marge_beneficiaire"));
             service.getDetailService(connection);
             service.getPiecesService(connection);
             list_service.add(service);
@@ -84,6 +86,47 @@ public class Service {
 
         return list_service;
     }
+
+
+    public Service getService_By_Id(Connection connection,String id)throws Exception {
+        Service service = null;
+
+        if (connection == null) {
+            Connexion connexion = new Connexion();
+            connection = connexion.Connex("postgres");
+        }
+
+        String requete= "select * from services where idservice_garage="+id+"";
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(requete);
+
+        while (resultSet.next()) {
+            service = new Service(resultSet.getInt("idservice_garage"),resultSet.getString("nom_service"),resultSet.getDouble("marge_beneficiaire"));
+            service.getDetailService(connection);
+            service.getPiecesService(connection);
+        }
+
+        return service;
+    }
+
+
+
+    public void getUpdate_marge_beneficiaire(Connection connection,String benefice,String id)throws Exception {
+        Service service = null;
+
+        if (connection == null) {
+            Connexion connexion = new Connexion();
+            connection = connexion.Connex("postgres");
+        }
+
+        String requete= "update services set marge_beneficiaire="+benefice+" where idservice_garage="+id+"";
+        Statement statement = connection.createStatement();
+        statement.execute(requete);
+
+    }
+
+
+
 
     public void getPiecesService(Connection connection) throws Exception {
         ArrayList<Piece> detailPieceservice = new ArrayList<Piece>();
@@ -110,12 +153,17 @@ public class Service {
 
 
     public double getMargeBeneficiaire() {
-        double calcul =  (getMontantService() + getRevenuMateriel()) * 20/100;
+        double calcul =  (getMontantService() + getRevenuMateriel()) * getMarge_Beneficiaire()/100;
         return calcul;
     }
 
     public double getValeurService() {
         double calcul = getMontantService() + getRevenuMateriel() + getMargeBeneficiaire();
+        return calcul;
+    }
+
+    public double Benefice() {
+        double calcul = getValeurService() - (getMontantService() + getRevenuMateriel());
         return calcul;
     }
     
@@ -131,6 +179,13 @@ public class Service {
     }
     public void setNom_service(String nom_service) {
         Nom_service = nom_service;
+    }
+    public double getMarge_Beneficiaire() {
+        return Marge_Beneficiaire;
+    }
+
+    public void setMarge_Beneficiaire(double marge_Beneficiaire) {
+        Marge_Beneficiaire = marge_Beneficiaire;
     }
     public ArrayList<ServicePoste> getListposte() {
         return listposte;

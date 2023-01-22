@@ -33,6 +33,8 @@ create table services (
     nom_service varchar(50)
 );
 
+alter table services add column marge_beneficiaire double precision;  
+
 create table service_poste (
     idservice_poste serial primary key,
     idservice int,
@@ -89,4 +91,9 @@ insert into service_piece values (1,2,1);
 insert into service_piece values (1,3,1);
 insert into service_piece values (2,4,2);
 insert into service_piece values (2,5,2);
+
+
+
+update services set marge_beneficiaire=10 where idservice_garage=1;
+update services set marge_beneficiaire=15 where idservice_garage=2;
 

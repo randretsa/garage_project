@@ -34,17 +34,19 @@ ArrayList<Service> list_Services = (ArrayList)request.getAttribute("list_Service
            <th>Revenus materiels</th>
            <th>Marge Beneficiaire</th>
            <th>Montant</th>
+           <th>Benefice</th>
          </tr>
          <% 
             for(Service service : list_Services) {  
          %>
          <tr>
            <td><%out.println(service.getIdservice());%></td>
-           <td><%out.println(service.getNom_service());%></td>
+           <td><a href="detailserviceservlet?id=<%out.println(service.getIdservice());%>"><%out.println(service.getNom_service());%></a></td>
            <td><%out.println(service.getMontantService());%></td>
            <td><%out.println(service.getRevenuMateriel());%></td>
-           <td><%out.println(service.getMargeBeneficiaire());%></td>
+           <td><%out.println(service.getMarge_Beneficiaire()+"%");%></td>
            <td><%out.println(service.getValeurService());%></td>
+           <td><%out.println(service.Benefice());%></td>
          </tr>
          <% } %>
        </table> 

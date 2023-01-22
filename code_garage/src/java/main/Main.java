@@ -37,8 +37,8 @@ public class Main {
             //System.out.println(list_service.get(index).getNom_service() + " " + list_service.get(index).getMontantService());
         }
         //System.out.println(service.getMontantService());
-        System.out.println(service.getValeurService());
-        
+        //System.out.println(service.getValeurService());
+        System.out.println(service.getService_By_Id(null, "1").getNom_service());
         
         Employee emp = new Employee();
         emp.saveEmploye(connexion.Connex("postgres"), "njaka", "andria", new Date(), 1, 1);
