@@ -114,7 +114,7 @@ public class InsertEmployeServlet extends HttpServlet {
                 Connexion connexion = null;
                 try{
                     
-                   connexion = new Connexion();
+                    connexion = new Connexion();
                     employee = new Employee();
                     java.util.Date date_naissance = new SimpleDateFormat("yyyy-MM-dd").parse(date);
                     //out.print(nom + prenom + date_naissance + idniveau + idposte);

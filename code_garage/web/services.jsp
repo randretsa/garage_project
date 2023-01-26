@@ -20,38 +20,37 @@ ArrayList<Service> list_Services = (ArrayList)request.getAttribute("list_Service
 </head>
 <body>
   <div class="main-content">
-
-    <form class="form-register" method="post" name="myform" onsubmit="return validate();">
-
-        <div class="form-register-with-email">
-                <div class="form-title-row">
-                    <h1>Nos Services</h1>
-       <table>
-         <tr>
-          <th>Id</th>
-           <th>Service</th>
-           <th>Revenus salarials</th>
-           <th>Revenus materiels</th>
-           <th>Marge Beneficiaire</th>
-           <th>Montant</th>
-           <th>Benefice</th>
-         </tr>
-         <% 
-            for(Service service : list_Services) {  
-         %>
-         <tr>
-           <td><%out.println(service.getIdservice());%></td>
-           <td><a href="detailserviceservlet?id=<%out.println(service.getIdservice());%>"><%out.println(service.getNom_service());%></a></td>
-           <td><%out.println(service.getMontantService());%></td>
-           <td><%out.println(service.getRevenuMateriel());%></td>
-           <td><%out.println(service.getMarge_Beneficiaire()+"%");%></td>
-           <td><%out.println(service.getValeurService());%></td>
-           <td><%out.println(service.Benefice());%></td>
-         </tr>
-         <% } %>
-       </table> 
-    </div>
+    <form class="form-register" method="post" name="myform">
+      <div class="form-register-with-email">
+        <div class="form-title-row">
+          <h1>Nos Services</h1>
+          <table>
+            <tr>
+              <th>Id</th>
+              <th>Service</th>
+              <th>Revenus salarials</th>
+              <th>Revenus materiels</th>
+              <th>Marge Beneficiaire</th>
+              <th>Montant</th>
+              <th>Benefice</th>
+            </tr>
+            <% 
+              for(Service service : list_Services) {  
+            %>
+            <tr>
+              <td><%out.println(service.getIdservice());%></td>
+              <td><a href="detailserviceservlet?id=<%out.println(service.getIdservice());%>"><%out.println(service.getNom_service());%></a></td>
+              <td><%out.println(service.getMontantService());%></td>
+              <td><%out.println(service.getRevenuMateriel());%></td>
+              <td><%out.println(service.getMarge_Beneficiaire()+"%");%></td>
+              <td><%out.println(service.getValeurService());%></td>
+              <td><%out.println(service.Benefice());%></td>
+            </tr>
+            <% } %>
+          </table> 
+        </div>
+      </div>
+    </form>
   </div>
-</div>
 </body>
 </html>

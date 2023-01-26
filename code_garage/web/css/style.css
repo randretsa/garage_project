@@ -74,8 +74,6 @@ html{
     position: relative;
     display: inline-block;
     vertical-align: top;
-    margin-left: 100px;
-    text-align: center;
 }
 
 .form-register-with-email .form-row{
@@ -87,7 +85,7 @@ html{
     text-align: center;
     margin-top: -100px;
     width: 900px;
-    margin-left: 200px;
+    margin-left: 185px;
 }
 
 .form-register-with-email h1{
@@ -175,6 +173,36 @@ html{
         display: block;
         margin: 0;
     }
+}
+
+
+.modif_marge {
+    width: 1255px;
+    text-align: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    font-size: large;
+}
+
+.modif_marge input {
+    width: 13em;
+    height: 2em;
+}
+
+.modif_marge button {
+    width: 3.5cm;
+    height: 2.5em;
+    border-radius: 20px;
+    border-style: groove;
+    border-width: thin;
+    border-color: rgba(134, 132, 132, 0.868);
+}
+
+.modif_marge button:hover {
+    background-color: rgba(134, 132, 132, 0.868);
+    color: white;
+    transition-duration: 1s;
+    cursor: pointer;
 }
 
   

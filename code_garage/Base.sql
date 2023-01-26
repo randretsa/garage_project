@@ -58,6 +58,7 @@ create table service_piece (
 );
 
 
+
 insert into poste values (default,'Controleur de Vehicule');
 insert into poste values (default,'Peintre en carrosserie'); 
 insert into poste values (default,'Reparateur en carosserie'); 
@@ -93,7 +94,7 @@ insert into service_piece values (2,4,2);
 insert into service_piece values (2,5,2);
 
 
-
+-------------------------------------------------------------
 update services set marge_beneficiaire=10 where idservice_garage=1;
 update services set marge_beneficiaire=15 where idservice_garage=2;
 
