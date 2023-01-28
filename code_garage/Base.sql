@@ -57,7 +57,12 @@ create table service_piece (
     foreign key (idpiece) references pieces(idpiece)
 );
 
-
+create table Categorie_prix (
+    idCategorie_prix serial,
+    minimum double precision,
+    maximum double precision,
+    pourcentage double precision
+);
 
 insert into poste values (default,'Controleur de Vehicule');
 insert into poste values (default,'Peintre en carrosserie'); 
@@ -92,6 +97,11 @@ insert into service_piece values (1,2,1);
 insert into service_piece values (1,3,1);
 insert into service_piece values (2,4,2);
 insert into service_piece values (2,5,2);
+
+insert into Categorie_prix values (default,0,5000,10);
+insert into Categorie_prix values (default,5000,20000,25);
+insert into Categorie_prix values (default,20000,30000,30);
+insert into Categorie_prix values (default,100000,150000,10);
 
 
 -------------------------------------------------------------
