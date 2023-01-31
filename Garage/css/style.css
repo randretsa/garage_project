@@ -1,0 +1,135 @@
+.nav-link,.stretched-link {
+    color:  #f2f2f2 !important;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+}
+.nav-link::before {
+    content: '';
+    width: 0;
+    position: absolute;
+    bottom: 0;
+    height: 1px;
+    border: 0px solid  #f2f2f2;
+    -webkit-transition: all .5s ease-in;
+    -moz-transition: all .5s ease-in;
+    -ms-transition: all .5s ease-in;
+    -o-transition: all .5s ease-in;
+    transition: all .5s ease-in;
+}
+.nav-link:hover::before {
+    width: 70%;
+    border: 1px solid  #f2f2f2;
+}
+
+section {
+    padding: 80px 0;
+    overflow: hidden;
+}
+
+
+.score {
+    font-size: larger;
+    font-weight: 700;
+}
+
+.team {
+    font-size: large;
+}
+
+.win {
+    color: #2eb82e;
+}
+
+.loose {
+    color:  #f2f2f2;
+}
+
+.draw {
+    color: #666666;
+}
+
+.separator {
+    font-size: xx-large;
+    font-weight: 500;
+}
+
+
+.quart .team {
+    margin: 1.85rem;
+}
+
+.demi-final .team {
+    margin: 2rem;
+}
+
+.last-square {
+    position: relative;
+}
+
+.third-place {
+    position: absolute;
+    bottom: -90px;
+}
+
+.GROUPE-A {
+    background-color:  #f2f2f2;
+    color: #f2f2f2;
+} 
+
+.GROUPE-B {
+    background-color:  #e6b800;
+    color: #f2f2f2;
+}
+
+.GROUPE-C {
+    background-color:  #f2f2f2;
+    color: #f2f2f2;
+}
+
+.GROUPE-D {
+    background-color: #ffbf00;
+    color: #f2f2f2;
+}
+
+.GROUPE-E {
+    background-color: #999900;
+    color: #f2f2f2;
+}
+
+.GROUPE-F {
+    background-color:  #f2f2f2;
+    color: #f2f2f2;
+}
+
+.GROUPE-G {
+    background-color: #80aaff;
+    color: #f2f2f2;
+}
+
+.GROUPE-H {
+    background-color: #1a75ff;
+    color: #f2f2f2;
+}
+
+.team {
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+    border-radius: 10px;
+    text-align: center;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 6px 6px 6px -5px black;
+    opacity: 1;
+    -webkit-transition: opacity .5s ease-in;
+    -moz-transition: opacity .5s ease-in;
+    -ms-transition: opacity .5s ease-in;
+    -o-transition: opacity .5s ease-in;
+    transition: opacity .5s ease-in;
+}
+
+.team:hover {
+    opacity: .7;
+}

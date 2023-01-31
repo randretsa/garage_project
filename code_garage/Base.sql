@@ -64,6 +64,56 @@ create table Categorie_prix (
     pourcentage double precision
 );
 
+create table client (
+    idclient serial primary key,
+    nom varchar(50),
+    mot_de_passe varchar(50)
+);
+
+create table facture (
+    idfacture serial primary key,
+    idclient int,
+    ref varchar(50),
+    Date_facture date,
+    foreign key (idclient) references client(idclient)
+);
+
+create table factureService (
+    idfacture int,
+    idservice int,
+    quantite int,
+    montant double precision,
+    foreign key (idfacture) references facture(idfacture),
+    foreign key (idservice) references services(idservice_garage)
+);
+
+create table facturePiece (
+    idfacture int,
+    idpiece int,
+    quantite int,
+    montant double precision,
+    foreign key (idfacture) references facture(idfacture),
+    foreign key (idpiece) references pieces(idpiece)
+);
+
+create table payementFacture (
+    idfacture int,
+    montant double precision,
+    foreign key (idfacture) references facture(idfacture)
+);
+
+
+insert into client values (default,'mahefa','mah123');
+insert into client values (default,'nomena','nomena123');
+
+insert into facture values (default,1,'ref40','2023-01-31');
+insert into facture values (default,1,'ref50','2023-01-31');
+
+insert into factureService values (1,1,2,3000);
+insert into factureService values (1,2,3,5000);
+
+insert into payementFacture values (1,10000);
+
 insert into poste values (default,'Controleur de Vehicule');
 insert into poste values (default,'Peintre en carrosserie'); 
 insert into poste values (default,'Reparateur en carosserie'); 
