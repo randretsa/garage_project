@@ -33,25 +33,14 @@
             <div class="card card-1">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h2 class="title">Statistiques Budgetaires</h2>
-                    <form action="traitement/ajouter_habitat.php" method="POST" enctype="multipart/form-data">
+                    <h2 class="title">Repport</h2>
+                    <form name="/repportservlet" method="post">
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Reference">
+                            <input class="input--style-1" type="text" placeholder="Montant" name="montant">
                         </div>
 
                         <div class="input-group">
-                            <input class="input--style-1" type="date" placeholder="">
-                        </div>
-
-                        <div class="select">
-                            <select name="" id="">
-                                <option value="">CLIENT</option>
-                            </select>
-
-                            <select name="" id="">
-                                <option value="">SERVICE</option>
-                            </select>
-                            
+                            <input class="input--style-1" type="date" placeholder="" name="date">
                         </div>
                         
                         <div class="row row-space">

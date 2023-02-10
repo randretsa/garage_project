@@ -1,3 +1,11 @@
+<%@page import="java.util.*"%>
+<%@page import="finance.*"%>
+
+<%
+ArrayList<Depense> listDepense= (ArrayList<Depense>)request.getAttribute("alldepense");
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,23 +41,22 @@
             <div class="card card-1">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h2 class="title">Statistiques Budgetaires</h2>
-                    <form action="traitement/ajouter_habitat.php" method="POST" enctype="multipart/form-data">
+                    <h2 class="title">Depense</h2>
+                    <form name="/depenseserlet" method="post">
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Reference">
+                            <input class="input--style-1" type="text" placeholder="Montant" name="montant">
                         </div>
 
                         <div class="input-group">
-                            <input class="input--style-1" type="date" placeholder="">
+                            <input class="input--style-1" type="date" placeholder="" name="date">
                         </div>
 
-                        <div class="select">
-                            <select name="" id="">
-                                <option value="">CLIENT</option>
-                            </select>
-
-                            <select name="" id="">
-                                <option value="">SERVICE</option>
+                        <div class="select">                    
+                            <select name="iddepense" id="">
+                                <%
+                                    for(Depense depense : listDepense) { %>
+                                        <option value="<%out.print(depense.getIddepense());%>"><%out.print(depense.getLibelle());%></option>
+                                <% } %>
                             </select>
                             
                         </div>

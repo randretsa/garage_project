@@ -5,7 +5,7 @@
 package servlet;
 
 import connexion.Connexion;
-import facturation.Facture;
+import facturation.FactureService;
 import magasin.Piece;
 
 import java.io.IOException;
@@ -28,8 +28,8 @@ import metier.Service;
  *
  * @author randretsa
  */
-@WebServlet(name = "FactureServlet", urlPatterns = {"/factureservlet"})
-public class FactureServlet extends HttpServlet {
+@WebServlet(name = "SaveDetailFacture", urlPatterns = {"/savedetailfacture"})
+public class SaveDetailFacture extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,24 +74,24 @@ public class FactureServlet extends HttpServlet {
                         PrintWriter out = response.getWriter();          
         
                         try{
-                            String id = request.getParameter("idfacture");
-                            Facture facture = new Facture();
-                            facture.setIdFacture(Integer.parseInt(id));
+                            FactureService factureService = new FactureService();
 
-                            Service service = new Service();
-                            
-                           
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-                            request.setAttribute("listServices",service.getService(null));
-                         
+                            String idfacture = request.getParameter("idfacture");
+                            String idservice = request.getParameter("idservice");
+                            String montant = request.getParameter("montant");
+                            String quantite = request.getParameter("quantite");
+                            String remise = request.getParameter("remise");
+
+                            factureService.saveDetailFacture(null, idfacture, idservice, quantite, montant, remise);
+
+                            response.sendRedirect("factureservlet?idfacture="+idfacture+"");
+
                         }catch(Exception e){
                              out.print(e.getStackTrace());
                         }
 
                          
-                         RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
-                         dispat.forward(request,response);           
+                        
 
                 
     }
@@ -112,36 +112,16 @@ public class FactureServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
             
           //      Object o = request.getSession().getAttribute("id_candidat");
-                            String montant= request.getParameter("montant");
+                String idpiece= request.getParameter("piece");
+                          
         
                         try{
 
-                            Facture facture = new Facture();
-
-                            String id = request.getParameter("idfacture");
-                            facture.setIdFacture(Integer.parseInt(id));
-                            
-                            Facture f = facture.getFactureById(null, id);
-                            
-                            f.payer(null,Double.parseDouble(montant));
-                                
-                            
-                                
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-
-                            response.sendRedirect("factureservlet?idfacture="+id+"");
-                            
-                            // RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
-                            // dispat.forward(request,response); 
                             
                          
                         }catch(Exception e){
-                             out.print(e.getMessage());
-                        }
-
-                         
-
+                             out.print(e.getStackTrace());
+                        } 
                 
   
         

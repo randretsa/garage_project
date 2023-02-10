@@ -5,7 +5,8 @@
 package servlet;
 
 import connexion.Connexion;
-import facturation.Facture;
+import finance.Depense;
+import finance.DetailDepense;
 import magasin.Piece;
 
 import java.io.IOException;
@@ -28,8 +29,8 @@ import metier.Service;
  *
  * @author randretsa
  */
-@WebServlet(name = "FactureServlet", urlPatterns = {"/factureservlet"})
-public class FactureServlet extends HttpServlet {
+@WebServlet(name = "DepenseServlet", urlPatterns = {"/depenseservlet"})
+public class DepenseServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,23 +75,18 @@ public class FactureServlet extends HttpServlet {
                         PrintWriter out = response.getWriter();          
         
                         try{
-                            String id = request.getParameter("idfacture");
-                            Facture facture = new Facture();
-                            facture.setIdFacture(Integer.parseInt(id));
 
-                            Service service = new Service();
-                            
-                           
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-                            request.setAttribute("listServices",service.getService(null));
+                            Depense depense = new Depense();
+                    
+                            request.setAttribute("alldepense",depense.getAllDepense(null));
+
                          
                         }catch(Exception e){
                              out.print(e.getStackTrace());
                         }
 
                          
-                         RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
+                         RequestDispatcher dispat = request.getRequestDispatcher("/FormulaireDepense.jsp");
                          dispat.forward(request,response);           
 
                 
@@ -112,40 +108,29 @@ public class FactureServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
             
           //      Object o = request.getSession().getAttribute("id_candidat");
-                            String montant= request.getParameter("montant");
+                String idpiece= request.getParameter("piece");
+                          
         
                         try{
+                            DetailDepense detailDepense = new DetailDepense();
 
-                            Facture facture = new Facture();
+                            String montant = request.getParameter("montant");
+                            String date = request.getParameter("date");
+                            String iddepense = request.getParameter("iddepense");
 
-                            String id = request.getParameter("idfacture");
-                            facture.setIdFacture(Integer.parseInt(id));
-                            
-                            Facture f = facture.getFactureById(null, id);
-                            
-                            f.payer(null,Double.parseDouble(montant));
-                                
-                            
-                                
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
+                            detailDepense.save(null, iddepense, montant, date);
 
-                            response.sendRedirect("factureservlet?idfacture="+id+"");
-                            
-                            // RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
-                            // dispat.forward(request,response); 
-                            
+                            response.sendRedirect("financeservlet");
                          
                         }catch(Exception e){
                              out.print(e.getMessage());
                         }
 
                          
-
+                         
                 
   
         
-        //response.sendRedirect("/gestion_institut/noteservlet");
        
     }
 }

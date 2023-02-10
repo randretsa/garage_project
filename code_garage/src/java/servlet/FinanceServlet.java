@@ -5,7 +5,9 @@
 package servlet;
 
 import connexion.Connexion;
-import facturation.Facture;
+import finance.Depense;
+import finance.DetailDepense;
+import finance.EtatFinance;
 import magasin.Piece;
 
 import java.io.IOException;
@@ -28,8 +30,8 @@ import metier.Service;
  *
  * @author randretsa
  */
-@WebServlet(name = "FactureServlet", urlPatterns = {"/factureservlet"})
-public class FactureServlet extends HttpServlet {
+@WebServlet(name = "FinanceServlet", urlPatterns = {"/financeservlet"})
+public class FinanceServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,24 +76,20 @@ public class FactureServlet extends HttpServlet {
                         PrintWriter out = response.getWriter();          
         
                         try{
-                            String id = request.getParameter("idfacture");
-                            Facture facture = new Facture();
-                            facture.setIdFacture(Integer.parseInt(id));
 
-                            Service service = new Service();
-                            
-                           
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-                            request.setAttribute("listServices",service.getService(null));
+                            EtatFinance etatFinance = new EtatFinance();
+                            etatFinance.Recette();
+                            etatFinance.depense();
+                            etatFinance.detailCaisse();
+
+                            request.setAttribute("etatFinancier",etatFinance);
+                            RequestDispatcher dispat = request.getRequestDispatcher("/EtatFinancier.jsp");
+                            dispat.forward(request,response); 
                          
                         }catch(Exception e){
-                             out.print(e.getStackTrace());
+                             out.print(e.getMessage());
                         }
-
-                         
-                         RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
-                         dispat.forward(request,response);           
+          
 
                 
     }
@@ -112,40 +110,21 @@ public class FactureServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
             
           //      Object o = request.getSession().getAttribute("id_candidat");
-                            String montant= request.getParameter("montant");
+                String idpiece= request.getParameter("piece");
+                          
         
                         try{
-
-                            Facture facture = new Facture();
-
-                            String id = request.getParameter("idfacture");
-                            facture.setIdFacture(Integer.parseInt(id));
-                            
-                            Facture f = facture.getFactureById(null, id);
-                            
-                            f.payer(null,Double.parseDouble(montant));
-                                
-                            
-                                
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-
-                            response.sendRedirect("factureservlet?idfacture="+id+"");
-                            
-                            // RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
-                            // dispat.forward(request,response); 
                             
                          
                         }catch(Exception e){
-                             out.print(e.getMessage());
+                             out.print(e.getStackTrace());
                         }
 
                          
-
+                         
                 
   
         
-        //response.sendRedirect("/gestion_institut/noteservlet");
        
     }
 }

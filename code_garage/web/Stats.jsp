@@ -1,3 +1,14 @@
+
+<%@page import="java.util.*"%>
+<%@page import="facturation.*"%>
+<%@page import="metier.*"%>
+
+<%
+ArrayList<Client> listClient= (ArrayList<Client>)request.getAttribute("listClients");
+ArrayList<Service> listService= (ArrayList<Service>)request.getAttribute("listServices");
+
+%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,7 +34,7 @@
     <link href="vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
     <!-- Main CSS-->
-    <link href="../../Stats/css/main.css" rel="stylesheet" media="all">
+    <link href="css2/main.css" rel="stylesheet" media="all">
     
 </head>
 
@@ -33,31 +44,27 @@
             <div class="card card-1">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <h2 class="title">Statistiques Budgetaires</h2>
-                    <form action="traitement/ajouter_habitat.php" method="POST" enctype="multipart/form-data">
+                    <h2 class="title">Facture</h2>
+                    <form name="/factureformulaire" method="post">
                         <div class="input-group">
-                            <input class="input--style-1" type="text" placeholder="Montant">
+                            <input class="input--style-1" type="text" placeholder="Reference"  name="reference">
                         </div>
+
                         <div class="input-group">
-                            <div class="rs-select2 js-select-simple select--no-search">
-                                <div class="row row-space">
-                                    <div class="rs-select2 js-select-simple select--no-search">
-                                        <select name="type">
-                                            <option disabled="disabled" selected="selected">Factures</option>
-                                            <option></option>
-                                            <option></option>
-                                            <option></option>
-                                            <option></option>
-                                        </select>
-                                        <div class="select-dropdown"></div>
-                                    </div>
-                                </div>
-                                   
-                                    
-                    
-                                <div class="select-dropdown"></div>
-                            </div>
+                            <input class="input--style-1" type="date" placeholder="" name="date">
                         </div>
+
+                        <div class="select">
+                            <select name="idclient" id="">
+                                <%
+                                    for(Client Client : listClient) { %>
+                                        <option value="<%out.println(Client.getIdClient());%>"><%out.println(Client.getNom());%></option>
+                                <%    } %>
+                            </select>
+                                
+                            
+                        </div>
+                        
                         <div class="row row-space">
                            
                         </div>
@@ -65,6 +72,9 @@
                             <button class="btn btn--radius btn--green" type="submit">Valider</button>
                         </div>
                     </form>
+                    <div class="p-t-20">
+                        <a href="listfactureservlet"><button class="btn btn--radius btn--green">Voir Facture</button></a>
+                    </div>
                 </div>
             </div>
         </div>

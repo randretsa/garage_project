@@ -1,10 +1,11 @@
 
 <%@page import="java.util.*"%>
 <%@page import="facturation.*"%>
+<%@page import="metier.*"%>
 
 <%
 Facture factures = (Facture)request.getAttribute("Facture");
-
+ArrayList<Service> listService = (ArrayList<Service>)request.getAttribute("listServices");
 %>
 
 <!DOCTYPE html>
@@ -40,7 +41,6 @@ Facture factures = (Facture)request.getAttribute("Facture");
 
 
 
-
           <h1>Facture</h1>
           <table>
             <tr>
@@ -48,6 +48,7 @@ Facture factures = (Facture)request.getAttribute("Facture");
               <th>Service</th>
               <th>Prix Unitaire</th>
               <th>Quantite</th>
+              <th>Remise</th>
               <th>Prix Total</th>
             </tr>
             <% 
@@ -58,9 +59,28 @@ Facture factures = (Facture)request.getAttribute("Facture");
               <td><%out.println(factureservice.getNom_service());%></td>
               <td><%out.println(factureservice.getPrix_unitaire());%></td>
               <td><%out.println(factureservice.getQuantite());%></td>
+              <td><%out.println(factureservice.getRemise()+ "%");%></td>
               <td><%out.println(factureservice.getMontantLine());%></td>
             </tr>
             <% } %>
+
+            <tr>
+              <form action="/code_garage/savedetailfacture" method="get">
+                <td><input type="hidden" name="idfacture" value="<%out.print(factures.getIdFacture());%>"></td>
+                <td>
+                  <select name="idservice" id="">
+                    <%
+                      for(Service service : listService) { %>
+                      <option value="<%out.print(service.getIdservice());%>"><%out.print(service.getNom_service());%></option>
+                    <% } %>
+                  </select>
+                </td>
+                <td><input type="text" placeholder="Prix" name="montant"></td>
+                <td><input type="text" placeholder="Quantite" name="quantite"></td>
+                <td><input type="text" placeholder="Remise" name="remise"></td>
+                <td><button type="submit">Valider</button></td>
+              </form>
+            </tr>
           </table> 
 
           <h1>Etat Facture</h1>
@@ -83,10 +103,11 @@ Facture factures = (Facture)request.getAttribute("Facture");
       <div class="modif_marge">
         <form class="" method="post" name="/factureservlet">
                 <label for="">Payer</label>
-                    <input type="text" name="montant" id="nom" placeholder="montant">
-                    <button type="submit">Valider</button>
-                    <input type="hidden" name="idfacture" value="<%out.println(factures.getIdFacture());%>">
+                  <input type="text" name="montant" id="nom" placeholder="montant">
+                  <button type="submit">Valider</button>
+                  <input type="hidden" name="idfacture" value="<%out.println(factures.getIdFacture());%>">
         </form>
+              <a href="financeservlet"><button style="margin-top: 50px;">Etat Financier</button></a>
       </div>
   </div>
 </body>

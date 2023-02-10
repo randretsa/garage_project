@@ -34,6 +34,30 @@ public class Facture {
     }
 
 
+    public void saveFacture(Connection connection,String idclient,String reference,String date)throws Exception {
+        if (connection == null) {
+            Connexion connexion = new Connexion();
+            connection = connexion.Connex("postgres");
+        }
+
+            String requete= "insert into facture values (default,"+idclient+",'"+reference+"','"+date+"')";
+            Statement statement = connection.createStatement();
+            statement.execute(requete);
+
+        connection.close();
+    }
+
+    public boolean checkRemiseAnniversaire(Connection connection) throws Exception {
+        Client client = new Client().getClientById(connection, String.valueOf(idClient));
+
+        if ((client.getDate_Naissance().getMonth() == (this.getDateFacture().getMonth())) && (client.getDate_Naissance().getDate() == (this.getDateFacture().getDate()))) {
+            return true;
+        }
+
+        return false;
+    }
+
+
     public void payer(Connection connection,double montant) throws Exception{
         if (connection == null) {
             Connexion connexion = new Connexion();
@@ -131,11 +155,20 @@ public class Facture {
     }
 
 
-    public double getMontantTotal () {
+    public double getMontantTotal() {
         double montantTotal=0;
-        for (int i = 0; i < listfactureService.size(); i++) {
-            montantTotal = montantTotal + listfactureService.get(i).getMontantLine();
-        }
+            try {
+                for (int i = 0; i < listfactureService.size(); i++) {
+                    montantTotal = montantTotal + listfactureService.get(i).getMontantLine();
+                }
+                if (this.checkRemiseAnniversaire(null)) {
+                    System.out.println(this.checkRemiseAnniversaire(null));
+                    montantTotal = montantTotal - (montantTotal * 50)/100;
+                }
+            } catch (Exception e) {
+                // TODO: handle exception
+            }
+
         return montantTotal;
     }
 
@@ -147,12 +180,12 @@ public class Facture {
             connection = connexion.Connex("postgres");
         }
 
-        String requete= "select factureservice.idfacture,factureservice.idservice,quantite,montant,services.nom_service,services.marge_beneficiaire from factureservice join facture on facture.idfacture=factureservice.idfacture join services on services.idservice_garage=factureservice.idservice where factureservice.idfacture="+this.getIdFacture()+"";
+        String requete= "select factureservice.idfacture,factureservice.idservice,quantite,montant,services.nom_service,services.marge_beneficiaire,remise from factureservice join facture on facture.idfacture=factureservice.idfacture join services on services.idservice_garage=factureservice.idservice where factureservice.idfacture="+this.getIdFacture()+"";
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(requete);
 
         while (resultSet.next()) {
-            FactureService factureservice = new FactureService(resultSet.getInt("idfacture"),resultSet.getInt("quantite"),resultSet.getDouble("montant"));
+            FactureService factureservice = new FactureService(resultSet.getInt("idfacture"),resultSet.getInt("quantite"),resultSet.getDouble("montant"),resultSet.getDouble("remise"));
             factureservice.setIdservice(resultSet.getInt("idservice"));
             factureservice.setNom_service(resultSet.getString("nom_service"));
             factureservice.setMarge_Beneficiaire(resultSet.getDouble("marge_beneficiaire"));

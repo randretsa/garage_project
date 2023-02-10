@@ -5,6 +5,7 @@
 package servlet;
 
 import connexion.Connexion;
+import facturation.Client;
 import facturation.Facture;
 import magasin.Piece;
 
@@ -13,6 +14,8 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,8 +31,8 @@ import metier.Service;
  *
  * @author randretsa
  */
-@WebServlet(name = "FactureServlet", urlPatterns = {"/factureservlet"})
-public class FactureServlet extends HttpServlet {
+@WebServlet(name = "FactureFormulaire", urlPatterns = {"/factureformulaire"})
+public class FactureFormulaire extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,23 +77,20 @@ public class FactureServlet extends HttpServlet {
                         PrintWriter out = response.getWriter();          
         
                         try{
-                            String id = request.getParameter("idfacture");
-                            Facture facture = new Facture();
-                            facture.setIdFacture(Integer.parseInt(id));
-
+                            Client client = new Client();
                             Service service = new Service();
-                            
-                           
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-                            request.setAttribute("listServices",service.getService(null));
+                            List<Client> listClients = client.getAllClient(null);
+                            List<Service> listServices = service.getService(null);
+
+                            request.setAttribute("listClients",listClients);
+                            request.setAttribute("listServices",listServices);
                          
                         }catch(Exception e){
                              out.print(e.getStackTrace());
                         }
 
                          
-                         RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
+                         RequestDispatcher dispat = request.getRequestDispatcher("/Stats.jsp");
                          dispat.forward(request,response);           
 
                 
@@ -112,27 +112,18 @@ public class FactureServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
             
           //      Object o = request.getSession().getAttribute("id_candidat");
-                            String montant= request.getParameter("montant");
+                            String reference= request.getParameter("reference");
+                            String date = request.getParameter("date");
+                            String idclient = request.getParameter("idclient");
         
                         try{
 
                             Facture facture = new Facture();
-
-                            String id = request.getParameter("idfacture");
-                            facture.setIdFacture(Integer.parseInt(id));
-                            
-                            Facture f = facture.getFactureById(null, id);
-                            
-                            f.payer(null,Double.parseDouble(montant));
+                            facture.saveFacture(null, idclient, reference, date);
                                 
+                            response.sendRedirect("listfactureservlet");
                             
-                                
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-
-                            response.sendRedirect("factureservlet?idfacture="+id+"");
-                            
-                            // RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
+                            // RequestDispatcher dispat = request.getRequestDispatcher("/.jsp");
                             // dispat.forward(request,response); 
                             
                          

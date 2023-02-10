@@ -5,8 +5,7 @@
 package servlet;
 
 import connexion.Connexion;
-import facturation.Facture;
-import magasin.Piece;
+import finance.Repport;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,8 +27,8 @@ import metier.Service;
  *
  * @author randretsa
  */
-@WebServlet(name = "FactureServlet", urlPatterns = {"/factureservlet"})
-public class FactureServlet extends HttpServlet {
+@WebServlet(name = "RepportServlet", urlPatterns = {"/repportservlet"})
+public class RepportServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -74,28 +73,13 @@ public class FactureServlet extends HttpServlet {
                         PrintWriter out = response.getWriter();          
         
                         try{
-                            String id = request.getParameter("idfacture");
-                            Facture facture = new Facture();
-                            facture.setIdFacture(Integer.parseInt(id));
-
-                            Service service = new Service();
-                            
-                           
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-                            request.setAttribute("listServices",service.getService(null));
-                         
+                            RequestDispatcher dispat = request.getRequestDispatcher("/FormulaireRepport.jsp");
+                            dispat.forward(request,response);
                         }catch(Exception e){
-                             out.print(e.getStackTrace());
+                             out.print(e.getMessage());
                         }
-
-                         
-                         RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
-                         dispat.forward(request,response);           
-
-                
+          
     }
-
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -112,40 +96,36 @@ public class FactureServlet extends HttpServlet {
                 PrintWriter out = response.getWriter();
             
           //      Object o = request.getSession().getAttribute("id_candidat");
-                            String montant= request.getParameter("montant");
-        
-                        try{
+                
+                try{
+                    
+                        Repport repport = new Repport();
+                            String montant = request.getParameter("montant");
+                            String date = request.getParameter("date");
 
-                            Facture facture = new Facture();
 
-                            String id = request.getParameter("idfacture");
-                            facture.setIdFacture(Integer.parseInt(id));
-                            
-                            Facture f = facture.getFactureById(null, id);
-                            
-                            f.payer(null,Double.parseDouble(montant));
-                                
-                            
-                                
-                            
-                            request.setAttribute("Facture", facture.getFactureById(null, id));
-
-                            response.sendRedirect("factureservlet?idfacture="+id+"");
-                            
-                            // RequestDispatcher dispat = request.getRequestDispatcher("/Facture.jsp");
-                            // dispat.forward(request,response); 
-                            
+                            repport.saveRepport(null, montant, date);
                          
-                        }catch(Exception e){
-                             out.print(e.getMessage());
-                        }
+                            response.sendRedirect("financeservlet");
+                }catch(Exception e){
 
-                         
-
+                    out.print(e);
+                   
+                }
                 
   
         
-        //response.sendRedirect("/gestion_institut/noteservlet");
        
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
+
 }

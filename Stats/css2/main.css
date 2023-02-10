@@ -235,6 +235,18 @@ input {
   position: relative;
   margin-bottom: 30px;
   border-bottom: 2px solid #ccc;
+  
+}
+
+.select {
+  display: flex;
+  justify-content: space-between;
+}
+
+.input-group-achat {
+  display: inline-flex;
+  justify-content: space-between;
+  width: 500px;
 }
 
 .input-icon {

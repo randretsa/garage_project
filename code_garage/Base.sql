@@ -33,7 +33,7 @@ create table services (
     nom_service varchar(50)
 );
 
-alter table services add column marge_beneficiaire double precision;  
+alter table services add column marge_beneficiaire double precision; 
 
 create table service_poste (
     idservice_poste serial primary key,
@@ -70,6 +70,8 @@ create table client (
     mot_de_passe varchar(50)
 );
 
+alter table client add column date_naissance date;
+
 create table facture (
     idfacture serial primary key,
     idclient int,
@@ -87,6 +89,8 @@ create table factureService (
     foreign key (idservice) references services(idservice_garage)
 );
 
+alter table FactureService add column  remise double precision;
+
 create table facturePiece (
     idfacture int,
     idpiece int,
@@ -102,6 +106,23 @@ create table payementFacture (
     foreign key (idfacture) references facture(idfacture)
 );
 
+create table depense (
+    iddepense serial primary key,
+    libelle varchar(50)
+);
+
+create table detailDepense (
+    iddepense int,
+    montant double precision,
+    Date_Depense date,
+    foreign key (iddepense) references depense(iddepense)
+);
+
+create table repport (
+    idrepport serial,
+    montant double precision,
+    date_repport date
+);
 
 insert into client values (default,'mahefa','mah123');
 insert into client values (default,'nomena','nomena123');
@@ -111,7 +132,7 @@ insert into facture values (default,1,'ref50','2023-01-31');
 
 insert into factureService values (1,1,2,3000);
 insert into factureService values (1,2,3,5000);
-
+insert into factureService values (2,1,2,3000,0);
 insert into payementFacture values (1,10000);
 
 insert into poste values (default,'Controleur de Vehicule');
@@ -154,7 +175,18 @@ insert into Categorie_prix values (default,20000,30000,30);
 insert into Categorie_prix values (default,100000,150000,10);
 
 
+insert into depense values(default,'Jirama');
+insert into depense values(default,'Taxi');
+
+insert into repport values(default,1000,'2023-02-07');
+insert into repport values(default,1000,'2023-02-08');
+
+
 -------------------------------------------------------------
 update services set marge_beneficiaire=10 where idservice_garage=1;
 update services set marge_beneficiaire=15 where idservice_garage=2;
+
+
+update client set date_naissance='2004-01-01' where idclient=1;
+update client set date_naissance='2003-02-02' where idclient=2;
 
